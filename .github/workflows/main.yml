@@ -34,15 +34,17 @@ jobs:
             # Генерируем уникальное имя файла
             FILENAME="commit-file-$(date +%Y%m%d)-$i-$(shuf -i 1000-9999 -n 1).txt"
 
-            # Генерируем случайные символы (Python в однострочнике)
-            python3 -c "
+            # Генерируем случайные символы с помощью Python (многострочная команда)
+            python3 << END_PYTHON
 import random
 import string
+
 chars = ''.join(random.choices(string.ascii_letters + string.digits, k=50))
 with open('$FILENAME', 'w') as f:
     f.write(chars + '\\n')
+
 print(f'✅ Файл {FILENAME} создан.')
-"
+END_PYTHON
 
             # Добавляем, коммитим и пушим
             git add "$FILENAME"
