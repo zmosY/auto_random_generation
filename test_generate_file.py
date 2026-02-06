@@ -65,10 +65,10 @@ class TestGenerateRandomFile(unittest.TestCase):
     def test_main_with_no_arguments(self):
         """Test that main script requires exactly one argument"""
         # Test by running the script as a subprocess
-        import subprocess
+        script_dir = os.path.dirname(os.path.abspath(__file__))
         result = subprocess.run(
             [sys.executable, 'generate_file.py'],
-            cwd='/home/runner/work/auto_random_generation/auto_random_generation',
+            cwd=script_dir,
             capture_output=True,
             text=True
         )
